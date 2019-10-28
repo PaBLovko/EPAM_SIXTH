@@ -2,17 +2,17 @@ package by.epam.intro.linkedList.entity;
 
 public class List {
 
-    private Node elem;
+    private Node head;
 
     public List(){
-        this.elem = null;
+        this.head = null;
     }
 
-    public Node getElem() {
-        return elem;
+    public Node getHead() {
+        return head;
     }
 
-    public void setElem(Node elem) {
-        this.elem = elem;
+    public void setHead(Node elem) {
+        this.head = elem;
     }
 }

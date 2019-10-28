@@ -5,50 +5,71 @@ import by.epam.intro.linkedList.entity.Node;
 
 public class ListLogic {
 
-    public void add(List list, int value){
-        list.getElem().setNext(new Node(value,list.getElem()));
-    }
-
-    public void delete(List list, int value){
-
-    }
-
-    public Node search(List list, int value){
-        if(list.getElem() == null){
-            return null;
+    public List add(List list, int value){
+        Node newNode = new Node(value);
+        newNode.setNext(null);
+        if (list.getHead() == null) {
+            list.setHead(newNode);
         }
-        return search(list.getElem(),value);
-    }
-
-    private Node search(List list, int value){
-        if (list.getElem() == null){
-            return null;
-        }
-        return search(list.getElem(),value);
-    }
-
-    private Node searchParent (Node node, int value) {
-        if (value > node.getData()) {
-            if (node.getRight() == null) {
-                return null;
+        else {
+            Node last = list.getHead();
+            while (last.getNext() != null) {
+                last = last.getNext();
             }
-            if (node.getRight().getData() == value) {
-                return node;
+            last.setNext(newNode);
+        }
+        return list;
+    }
+
+    public List deleteByKey(List list, int key) {
+        Node currNode = list.getHead(), prev = null;
+        if (currNode != null && currNode.getData() == key) {
+            list.setHead(currNode.getNext());
+            return list;
+        }
+        while (currNode != null && currNode.getData() != key) {
+            prev = currNode;
+            currNode = currNode.getNext();
+        }
+        if (currNode != null) {
+            prev.setNext(currNode.getNext());
+        }
+        if (currNode == null) {
+            return list;
+        }
+        return list;
+    }
+
+    public List deleteAtPosition(List list, int index) {
+        Node currNode = list.getHead(), prev = null;
+        if (index == 0 && currNode != null) {
+            list.setHead(currNode.getNext());
+            return list;
+        }
+        int counter = 0;
+        while (currNode != null) {
+            if (counter == index) {
+                prev.setNext(currNode.getNext());
+                break;
             }
-            return searchParent(node.getRight(), value);
+            else {
+                prev = currNode;
+                currNode = currNode.getNext();
+                counter++;
+            }
+        }
+        if (currNode == null) {
+            return list;
+        }
+        return list;
     }
 
-    public void show(List list){
-        if (list.getElem() == null){
-            return;
+    public void show(List list) {
+        Node currNode = list.getHead();
+        System.out.print("LinkedList: ");
+        while (currNode != null) {
+            System.out.print(currNode.getData() + " ");
+            currNode = currNode.getNext();
         }
-        show(list.getElem());
-    }
-
-    public void show(Node node){
-        if(node != null){
-            System.out.println(node.getData()+" ");
-        }
-        show(node.getNext());
     }
 }

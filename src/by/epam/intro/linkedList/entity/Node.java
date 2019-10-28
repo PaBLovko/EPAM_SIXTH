@@ -3,12 +3,10 @@ package by.epam.intro.linkedList.entity;
 public class Node {
     private int data;
     private Node next;
-    private Node previous;
 
-    public Node(int data, Node previous) {
+    public Node(int data) {
         this.data = data;
         this.next = null;
-        this.previous = previous;
     }
 
     public void setData(int data) {
@@ -25,13 +23,5 @@ public class Node {
 
     public Node getNext() {
         return next;
-    }
-
-    public Node getPrevious() {
-        return previous;
-    }
-
-    public void setPrevious(Node previous) {
-        this.previous = previous;
     }
 }
